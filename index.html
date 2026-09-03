@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Orientação para Pessoas com Baixa Visão</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header>
+    <h1>Orientação para Pessoas com Baixa Visão</h1>
+    <p>Arduino Uno R3 com Fita de LEDs e Efeito Fade-Out</p>
+    <div class="authors">
+      Desenvolvido por: Heloísa (nº12), Yngrid (nº31), Yasmin (nº30), Vinícius (nº25), Williany (nº29) e Sara (nº23)
+    </div>
+  </header>
+
+  <div class="container">
+    
+    <section class="interactive-card">
+      <h2>Sobre o Projeto</h2>
+      <p>Um sistema de iluminação interativa projetado para guiar pessoas com baixa visão em corredores e passagens. Através de um rastro luminoso suave (efeito cometa) ativado por movimento, o sistema indica caminhos de forma segura sem causar ofuscamento.</p>
+    </section>
+
+    <section class="interactive-card">
+      <h2>Componentes Necessários</h2>
+      <ul>
+        <li><strong>Arduino Uno R3</strong></li>
+        <li><strong>Fita LED Endereçável (WS2812)</strong> – 30 LEDs (Pino Digital 6)</li>
+        <li><strong>Sensor PIR</strong> (Pino Digital 2)</li>
+        <li><strong>Fonte Externa 5V</strong> (Corrente suficiente para os LEDs)</li>
+        <li><strong>Capacitor 1000uF</strong> (entre 5V e GND)</li>
+        <li><strong>Resistor 330Ω</strong> (no fio de sinal do LED)</li>
+        <li>Protoboard, Jumpers e Cabo USB</li>
+      </ul>
+      <div class="alert-box">
+        ⚠️ ATENÇÃO: O compartilhamento do GND entre o Arduino e a fonte externa é fundamental para evitar interferências no sinal!
+      </div>
+    </section>
+
+    <section class="interactive-card">
+      <h2>Funcionamento do Código (Efeito Fade-Out)</h2>
+      <p>O Arduino utiliza PWM interno para controlar o brilho dos LEDs endereçáveis e criar a animação do rastro luminoso:</p>
+      
+      <div class="pipeline">
+        <div class="step">
+          <span class="step-title">1. Detecção</span>
+          A borda de subida do Sensor PIR identifica o movimento e inicia a animação.
+        </div>
+        <div class="step">
+          <span class="step-title">2. Temporização</span>
+          A função millis() controla o avanço gradual do cometa luminoso pela fita.
+        </div>
+        <div class="step">
+          <span class="step-title">3. Renderização</span>
+          A fita é atualizada frame a frame com brilho decrescente (tons de laranja/amarelo).
+        </div>
+      </div>
+    </section>
+
+    <section class="interactive-card">
+      <h2>Conforto Visual & Acessibilidade</h2>
+      <ul>
+        <li><strong>Conforto Visual:</strong> Transição suave de iluminação que previne o ofuscamento visual.</li>
+        <li><strong>Orientação Segura:</strong> Rastro luminoso claro indicando o caminho correto sem excesso de brilho.</li>
+        <li><strong>Versatilidade:</strong> Ajustável a diferentes necessidades, ambientes e larguras de corredores.</li>
+      </ul>
+    </section>
+
+    <section class="interactive-card">
+      <h2>Próximos Passos</h2>
+      <p>1. Testar o circuito em ambiente real para ajustes finos de velocidade e intensidade.<br>
+      2. Explorar a integração com outros tipos de sensores e interfaces visuais.<br>
+      3. Compartilhar a documentação para fomentar mais soluções de acessibilidade.</p>
+    </section>
+
+  </div>
+
+  <footer>
+    <p>Projeto de Acessibilidade — Dúvidas ou sugestões são sempre bem-vindas!</p>
+  </footer>
+
+  <script>
+    const cards = document.querySelectorAll('.interactive-card');
+
+    cards.forEach(card => {
+      card.addEventListener('mouseenter', () => {
+        if (!card.classList.contains('blinking')) {
+          card.classList.add('blinking');
+          
+          setTimeout(() => {
+            card.classList.remove('blinking');
+          }, 2400);
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>
